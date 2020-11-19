@@ -19,11 +19,11 @@ public class RoleServiceImpl implements RoleService {
                 + "note : " + role.getNote() + "}");
     }
 
-    // @Override
-    // public void printRole(Role role, int sort) {
-    //     System.out.println("{id: " + role.getId() + ", "
-    //             + "role_name : " + role.getRoleName() + ", "
-    //             + "note : " + role.getNote() + "}");
-    //     System.out.println(sort);
-    // }
+    @Override
+    public void printRole(Role role, int sort) {
+        System.out.println("{id: " + role.getId() + ", "
+                + "role_name : " + role.getRoleName() + ", "
+                + "note : " + role.getNote() + "}");
+        System.out.println(sort);
+    }
 }

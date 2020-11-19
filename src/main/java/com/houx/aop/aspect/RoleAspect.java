@@ -1,5 +1,8 @@
 package com.houx.aop.aspect;
 
+import com.houx.aop.verifier.RoleVerifier;
+import com.houx.aop.verifier.impl.RoleVerifierImpl;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
 import com.houx.game.pojo.Role;
@@ -13,10 +16,20 @@ import com.houx.game.pojo.Role;
 @Aspect
 public class RoleAspect {
 
+    @DeclareParents(value = "com.houx.aop.service.impl.RoleServiceImpl+", defaultImpl = RoleVerifierImpl.class)
+    public RoleVerifier roleVerifier;
+
+
     @Pointcut("execution(* com.houx.aop.service.impl.RoleServiceImpl.printRole(..))")
-    public void print(){
+    public void print() {
 
     }
+
+    @Before("execution(* com.houx.aop.service.impl.RoleServiceImpl.printRole())" + "&& args(role,sort)")
+    public void before(Role role, int sort) {
+        System.out.println("before");
+    }
+
 
     @Before("print()")
     //@Before("execution(* com.houx.aop.service.impl.RoleServiceImpl.printRole(..)) && within(com.houx.aop.service.impl.*)")
@@ -42,6 +55,18 @@ public class RoleAspect {
     //@AfterThrowing("execution(* com.houx.aop.service.impl.RoleServiceImpl.printRole(..))")
     public void afterThrowing() {
         System.out.println("afterThrowing ....");
+    }
+
+
+    @Around("print()")
+    public void around(ProceedingJoinPoint jp) {
+        System.out.println("around before ...");
+        try {
+            jp.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        System.out.println("around after ...");
     }
 }
 

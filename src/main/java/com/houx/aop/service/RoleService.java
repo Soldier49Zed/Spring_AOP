@@ -9,4 +9,5 @@ import com.houx.game.pojo.Role;
  */
 public interface RoleService {
     void  printRole(Role role);
+    public void printRole(Role role, int sort);
 }
