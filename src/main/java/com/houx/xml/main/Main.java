@@ -1,10 +1,9 @@
-package com.houx.main;
+package com.houx.xml.main;
 
 import com.houx.aop.verifier.RoleVerifier;
 import com.houx.game.pojo.Role;
 import com.houx.xml.service.RoleService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -12,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @Date: 2020/11/19
  * @Description:
  */
-public class Main3 {
+public class Main {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
         RoleService roleService = ctx.getBean(RoleService.class);
@@ -22,10 +21,7 @@ public class Main3 {
         role.setRoleName("role_name_1");
         role.setNote("note_1");
         if (roleVerifier.verify(role)) {
-
             roleService.printRole(role);
         }
-
-
     }
 }
