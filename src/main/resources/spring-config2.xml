@@ -8,7 +8,7 @@
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/ssm_demo" />
+        <property name="url" value="jdbc:mysql://localhost:3306/ssm_demo?useSSL=false" />
         <property name="username" value="root" />
         <property name="password" value="root" />
         <!--连接池的最大数据库连接数 -->
@@ -24,5 +24,23 @@
         <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
     </bean>
 
+
+    <!--<bean id="roleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+
+        <!--&lt;!&ndash;RoleMapper接口将被扫描为Mapper&ndash;&gt;-->
+        <!--<property name="mapperInterface" value="com.houx.database_test.mapper.RoleMapper"/>-->
+        <!---->
+        <!--<property name="SqlSessionFactory" ref="SqlSessionFactory"/>-->
+
+    <!--</bean>-->
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.houx.database_test.mapper"/>
+        <property name="SqlSessionFactoryBeanName" value="SqlSessionFactory"/>
+
+        <!--指定标注才扫描成为Mapper-->
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+
+    </bean>
 
 </beans>

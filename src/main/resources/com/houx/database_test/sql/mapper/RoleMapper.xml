@@ -6,22 +6,19 @@
 
 <mapper namespace="com.houx.database_test.mapper.RoleMapper">
     <insert id="insertRole" useGeneratedKeys="true" keyProperty="id">
-		insert into t_role(role_name, note) values (#{roleName}, #{note})
-	</insert>
+        insert into t_role(role_name,note) values (#{roleName},#{note})
+    </insert>
 
     <delete id="deleteRole" parameterType="long">
-		delete from t_role where id=#{id}
-	</delete>
+        delete from t_role where id = #{id}
+    </delete>
 
     <select id="getRole" parameterType="long" resultType="role">
-		select id, role_name as roleName, note from t_role where id = #{id}
-	</select>
+        select id,role_name roleName,note from t_role where id = #{id}
+    </select>
 
     <update id="updateRole" parameterType="role">
-		update t_role
-		set role_name = #{roleName},
-		note = #{roleName}
-		where id = #{id}
-	</update>
+        update t_role set role_name = #{roleName},note = #{note} where id = #{id}
+    </update>
 
 </mapper>
