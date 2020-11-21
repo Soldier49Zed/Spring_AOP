@@ -7,9 +7,9 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-    <bean id="xmlAspect" class="com.houx.xml.aspect.XmlAspect"/>
+    <bean id="xmlAspect" class="com.houx.aop_test.xml.aspect.XmlAspect"/>
 
-    <bean id="roleService" class="com.houx.xml.service.impl.RoleServiceImpl"/>
+    <bean id="roleService" class="com.houx.aop_test.xml.service.impl.RoleServiceImpl"/>
 
     <aop:config>
         <!--引用xmlAspect作为切面-->
@@ -17,13 +17,13 @@
 
             <!--定义切点-->
             <aop:pointcut id="printRole"
-                          expression="execution(* com.houx.xml.service.impl.RoleServiceImpl.printRole(..))"/>
+                          expression="execution(* com.houx.aop_test.xml.service.impl.RoleServiceImpl.printRole(..))"/>
 
 
             <!--定义通知 引入切点-->
             <!--<aop:before method="before"-->
-                        <!--pointcut="execution(* com.houx.xml.service.impl.RoleServiceImpl.printRole(..))"/>-->
-            <aop:before method="before" pointcut="execution(* com.houx.xml.service.impl.RoleServiceImpl.printRole(..)) and args(role)"/>
+                        <!--pointcut="execution(* com.houx.aop_test.xml.service.impl.RoleServiceImpl.printRole(..))"/>-->
+            <aop:before method="before" pointcut="execution(* com.houx.aop_test.xml.service.impl.RoleServiceImpl.printRole(..)) and args(role)"/>
             <aop:after method="after" pointcut-ref="printRole"/>
             <aop:after-throwing method="afterThrowing" pointcut-ref="printRole"/>
             <aop:after-returning method="afterReturning" pointcut-ref="printRole"/>
@@ -31,9 +31,9 @@
             <aop:around method="around" pointcut-ref="printRole"/>
 
 
-            <aop:declare-parents types-matching="com.houx.xml.service.impl.RoleServiceImpl+"
-                                 implement-interface="com.houx.aop.verifier.RoleVerifier"
-                                 default-impl="com.houx.aop.verifier.impl.RoleVerifierImpl"/>
+            <aop:declare-parents types-matching="com.houx.aop_test.xml.service.impl.RoleServiceImpl+"
+                                 implement-interface="com.houx.aop_test.aop.verifier.RoleVerifier"
+                                 default-impl="com.houx.aop_test.aop.verifier.impl.RoleVerifierImpl"/>
 
         </aop:aspect>
 
